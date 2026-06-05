@@ -1,0 +1,77 @@
+eval "$(starship init bash)"
+eval "$(zoxide init bash)"
+alias ff='fastfetch.exe'
+alias ffc='fastfetch.exe -c examples/25'
+alias ffs='fastfetch.exe -c examples/28'
+alias ffp='fastfetch.exe -c examples/31'
+fastfetch -c examples/31
+
+alias els='eza -lah --git --icons'
+alias ll='eza -lah --git --icons'
+alias et='eza --tree --icons'
+
+export EDITOR='E:\\DEV_PACKAGE\\scoop\\shims\\vim.exe'
+alias vim='E:\\DEV_PACKAGE\\scoop\\shims\\vim.exe'
+# Added by fuckit.sh installer
+source /c/Users/21894/.fuck/main.sh
+
+
+alias bash='E:\\DEV_PACKAGE\\scoop\\shims\\bash.exe'
+#alias bash='C:\Program Files\Git\bin\bash.exe'
+alias cls='clear.exe'
+
+ffm() {
+    local logo_dir="$HOME/.config/fastfetch"
+    local default_number=10          # 默认数字，用户可自行修改
+    local default_logo="cat"         # 默认 logo，用户可自行修改
+
+    # 功能 1：列出所有可用的 logo
+    if [[ $# -eq 1 && "$1" == "logo" ]]; then
+        echo "--- 可用的自定义 Logo 列表 ---"
+        if [[ -d "$logo_dir" ]]; then
+            find "$logo_dir" -maxdepth 1 -name '*.txt' -exec basename {} .txt \; | column
+        else
+            echo "Logo 目录不存在: $logo_dir"
+        fi
+        return
+    fi
+
+    # 功能 2：解析参数并设置 number 和 logo_name
+    local number logo_name
+
+    case $# in
+        0)
+            number="$default_number"
+            logo_name="$default_logo"
+            ;;
+        1)
+            # 单个参数：可能是数字，也可能是 logo 名称
+            if [[ "$1" =~ ^[0-9]+$ ]]; then
+                number="$1"
+                logo_name="$default_logo"
+            else
+                number="$default_number"
+                logo_name="$1"
+            fi
+            ;;
+        2)
+            number="$1"
+            logo_name="$2"
+            ;;
+        *)
+            echo "用法：ffm [数字] [logo名称]" >&2
+            echo "       ffm logo                # 列出所有 logo" >&2
+            return 1
+            ;;
+    esac
+
+    local config_path="examples/$number"
+    local full_logo_path="$logo_dir/$logo_name.txt"
+
+    if [[ ! -f "$full_logo_path" ]]; then
+        echo "错误：找不到 Logo 文件 '$logo_name.txt' 于 $logo_dir" >&2
+        return 1
+    fi
+
+    fastfetch -c "$config_path" --file "$full_logo_path"
+}
