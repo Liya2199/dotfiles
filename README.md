@@ -31,3 +31,7 @@
 ```bash
 # 初始化并立刻应用配置 (-a 表示 apply)
 chezmoi init --apply git@github.com:<你的GitHub用户名>/<你的仓库名>.git
+# 在这里即是:
+chezmoi init --apply git@github.com:Liya2199/dotfiles.git
+# 或者
+chezmoi init --apply https://github.com/Liya2199/dotfiles.git
