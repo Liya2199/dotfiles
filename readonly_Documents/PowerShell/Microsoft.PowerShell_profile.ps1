@@ -28,7 +28,13 @@ function fuck {
 
 
 # ====== oh-my-posh 可以替代starship ======
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\montys.omp.json" | Invoke-Expression
+# === winget install oh-my-posh ===
+#oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\montys.omp.json" | Invoke-Expression
+#oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\fish.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_rainbow.omp.json" | Invoke-Expression
+#oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\night-owl.omp.json" | Invoke-Expression
+#oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\blueish.omp.json" | Invoke-Expression
+#oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\catppuccin.omp.json" | Invoke-Expression
 # 导入posh-git模块
 #Import-Module posh-git 
 
@@ -76,7 +82,7 @@ function ffm {
     )
 
     # ==================== 用户自定义默认配置 ====================
-    $default_example = "20"      # 默认的主题数字
+    $default_example = "29"      # 默认的主题数字
     $default_logo    = "cat"     # 默认的 logo 文件名（不含后缀）
     $logoDir = "$HOME/.config/fastfetch"
     # ============================================================
@@ -161,3 +167,6 @@ Set-Alias -Name which -Value where.exe
 # 强制让 bash 指向 Git 的 bash
 Set-Alias bash "C:\Program Files\Git\bin\bash.exe"
 #Set-Alias bash "E:\DEV_PACKAGE\scoop\shims\bash.exe"
+# 设置view为IRFANVIEW的图片查看而非VIM的文本编辑
+Set-Alias view "D:\APLICATIONS\IRFANVIEW\view.exe"
+

@@ -57,13 +57,22 @@ return {
   unix_domains = {},
 
   -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
-  wsl_domains = {
+--  wsl_domains = {
+--    {
+--      name = "WSL:Ubuntu",
+--      distribution = "Ubuntu",
+--      username = "liya",
+--      default_cwd = "/home/liya",
+--      default_prog = { "zsh" },
+--    },
+--  },
+   wsl_domains = {
     {
-      name = "WSL:Ubuntu",
-      distribution = "Ubuntu",
+      name = "WSL:archlinux2",
+      distribution = "archlinux2",
       username = "liya",
       default_cwd = "/home/liya",
-      --default_prog = { "fish" },
+      default_prog = { "zsh" },
     },
   },
 }

@@ -6,11 +6,12 @@ return {
   -- 基础性能设置
   term = "xterm-256color",
   front_end = "WebGpu", -- 保持 WebGpu 性能最优
+  line_height = 1.0,
   webgpu_power_preference = "HighPerformance",
   -- 【关键优化点 1】Windows 系统级美化
   -- Mica 效果比 Acrylic 流畅得多，且非常有高级感（类似 macOS 的磨砂感）
-  win32_system_backdrop = "Mica",
-  window_background_opacity = 0.8, -- 配合 Mica，透明度建议在 0.8 左右
+  --win32_system_backdrop = "Mica",
+  --window_background_opacity = 0.8, -- 配合 Mica，透明度建议在 0.8 左右
 
   -- 主题选择
   color_scheme = "Gruvbox dark, medium (base16)",

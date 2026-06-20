@@ -1,0 +1,66 @@
+set nocompatible
+filetype plugin indent on
+syntax on
+set encoding=utf-8
+set fileencodings=utf-8,gb2312,gbk,gb18030,latin1
+set fileformats=unix,dos,mac
+
+" 开启真彩色支持 (必须，否则主题颜色会失真)
+set termguicolors
+set background=dark
+colorscheme catppuccin
+" 界面美化
+set number              " 显示绝对行号
+set relativenumber      " 显示相对行号 (Vim 玩家必备，方便跳转)
+set cursorline          " 高亮当前光标所在行
+set showmatch           " 括号匹配高亮
+set scrolloff=5         " 光标上下保留 5 行空白
+set signcolumn=yes      " 始终显示标志列，防止代码左右抖动
+set ttimeoutlen=0       " 消除按键延迟
+set updatetime=300      " 加快 CursorHold 触发速度
+" ==========================================
+" 光标形状配置 (Cursor Shape)
+" ==========================================
+" 1. 内部光标样式定义 (形状与闪烁频率)
+" n-v-c: Normal, Visual, Command 模式 -> 方块
+" i-ci: Insert 模式 -> 25%宽度的竖线
+" r-cr: Replace 模式 -> 20%高度的下划线
+set guicursor=n-v-c:block-Cursor/lCursor
+set guicursor+=i-ci:ver25-Cursor/lCursor
+set guicursor+=r-cr:hor20-Cursor/lCursor
+
+" 2. 针对终端的底层转义序列配置 (兼容大多数现代终端)
+if empty($TMUX)
+  " 如果不在 Tmux 中运行
+  let &t_SI = "\e[5 q"  " Start Insert (进入插入模式): 闪烁的竖线
+  let &t_SR = "\e[3 q"  " Start Replace (进入替换模式): 闪烁的下划线
+  let &t_EI = "\e[2 q"  " End Insert (回到正常模式): 固定的方块
+else
+  " 如果在 Tmux 中运行，需要特殊的包裹序列让 Tmux 透传转义码给终端
+  let &t_SI = "\ePtmux;\e\e[5 q\e\\"
+  let &t_SR = "\ePtmux;\e\e[3 q\e\\"
+  let &t_EI = "\ePtmux;\e\e[2 q\e\\"
+endif
+
+" 3. 确保退出 Vim 时恢复终端默认光标 (防止终端光标卡在竖线状态)
+autocmd VimLeave * :let &t_SI = "\e[2 q"
+" 搜索设置
+set hlsearch            " 高亮搜索结果
+set incsearch           " 实时搜索
+set ignorecase          " 忽略大小写
+set smartcase           " 智能大小写 (输入大写时自动区分大小写)
+
+" 缩进设置
+set expandtab           " 将 Tab 转换为空格
+set tabstop=4           " 一个 Tab 占 4 个空格
+set shiftwidth=4        " 自动缩进时使用 4 个空格
+set softtabstop=4       " 按退格键时删除 4 个空格
+
+" 剪切板设置
+if has('clipboard')
+        set clipboard=unnamedplus
+    endif
+
+
+" 设置 Leader 键为空格 (现代编辑器标准)
+let mapleader = " "
