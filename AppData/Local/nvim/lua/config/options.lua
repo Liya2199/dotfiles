@@ -5,6 +5,9 @@
 -- My config
 vim.g.root_spec = { "cwd" }
 -- vim.g.lazyvim_picker = "fzf" --妈的，为啥fzf卡顿
+-- 【注】这行其实无效：LazyVim 加载时会把它无条件覆盖回 "auto"（见 lazyvim/config/options.lua）。
+-- 真正切换到 fzf 的方式：取消注释 lazy.lua 里的 { import = "lazyvim.plugins.extras.editor.fzf" }。
+-- 若真切换，fzf-lua.lua 里已做好懒加载 + ui.select 接管判断，不会再复现历史卡顿。
 -- vim.g.lazy_did_setup = "telescope"
 -- vim.g.lazyvim_picker = "telescope"
 -- 这会让所有由 Neovim 启动的 Node 进程（包括所有 LSP）都遵循这个内存限制
@@ -34,9 +37,9 @@ if vim.fn.has("win32") == 1 then
   vim.opt.shellxquote = ""
   -- pwsh 7+ 支持,使用ps而非cmd
   if vim.fn.executable("pwsh") == 1 then
-    vim.o.shell = "pwsh" -- 使用 PowerShell Core (7+)
+    vim.o.shell = "pwsh -NoProfile -NoLogo" -- 使用 PowerShell Core (7+)
   else
-    vim.o.shell = "powershell" -- 使用 Windows 自带 PowerShell (5.1)
+    vim.o.shell = "powershell -NoProfile -NoLogo" -- 使用 Windows 自带 PowerShell (5.1)
   end
 end
 

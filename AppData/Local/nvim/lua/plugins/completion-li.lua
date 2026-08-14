@@ -173,6 +173,22 @@ return {
       },
     },
     config = function(_, opts)
+      -- 清除 LazyVim coding.blink extra 合并进来的旧字段：blink 1.10+ 已移除 sources.compat，
+      -- 残留会导致启动时弹 "sources → compat Unexpected field" 通知
+      if opts.sources then
+        opts.sources.compat = nil
+        -- 去重 sources.default（LazyVim extra 与本地配置合并后可能翻倍）
+        if vim.islist(opts.sources.default) then
+          local seen, dedup = {}, {}
+          for _, s in ipairs(opts.sources.default) do
+            if not seen[s] then
+              seen[s] = true
+              dedup[#dedup + 1] = s
+            end
+          end
+          opts.sources.default = dedup
+        end
+      end
       apply_blink_highlights()
       require("blink.cmp").setup(opts)
     end,

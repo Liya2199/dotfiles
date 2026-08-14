@@ -168,5 +168,5 @@ Set-Alias -Name which -Value where.exe
 Set-Alias bash "C:\Program Files\Git\bin\bash.exe"
 #Set-Alias bash "E:\DEV_PACKAGE\scoop\shims\bash.exe"
 # 设置view为IRFANVIEW的图片查看而非VIM的文本编辑
-Set-Alias view "D:\APLICATIONS\IRFANVIEW\view.exe"
+Set-Alias view "D:\APLICATIONS\IRFANVIEW\view-img.exe"
 

@@ -2,6 +2,7 @@
   "extras": [
     "lazyvim.plugins.extras.ai.sidekick",
     "lazyvim.plugins.extras.coding.mini-surround",
+    "lazyvim.plugins.extras.editor.neo-tree",
     "lazyvim.plugins.extras.util.project"
   ],
   "install_version": 8,

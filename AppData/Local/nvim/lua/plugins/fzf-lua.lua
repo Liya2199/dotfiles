@@ -1,6 +1,9 @@
 return {
   {
     "ibhagwan/fzf-lua",
+    -- 【性能优化】历史卡顿根因之一：这个 spec 之前没有任何懒加载，启动时就被加载。
+    -- event = "VeryLazy"：拖到启动完成后再加载，不占启动时间，保留插件随时可用。
+    event = "VeryLazy",
     opts = function(_, opts)
       opts = opts or {}
 
@@ -35,7 +38,14 @@ return {
 
       -- 4. 注册 UI Select
       -- 在 opts 函数内执行，确保 fzf-lua 替代原生的选择框
-      require("fzf-lua").register_ui_select()
+      -- 【性能优化】只在 fzf 真的是当前 picker 时才接管 vim.ui.select，
+      -- 否则 fzf-lua 会把 LazyVim 所有选择框（snacks/which-key 等）从 telescope 劫持走，互相打架
+      -- （这是历史“莫名卡顿”的第二个根因：启动即无条件劫持）。
+      -- 注：真正切到 fzf 的方式是取消注释 lazy.lua 里的 fzf extra 导入；
+      -- options.lua 里直接设 vim.g.lazyvim_picker 会被 LazyVim 覆盖回 auto，无效。
+      if LazyVim and LazyVim.pick and LazyVim.pick.picker and LazyVim.pick.picker.name == "fzf" then
+        require("fzf-lua").register_ui_select()
+      end
 
       return opts
     end,

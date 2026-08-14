@@ -20,6 +20,8 @@ return {
       servers = {
         -- 再次双重保险：给 copilot 彻底拉黑
         copilot = { enabled = false },
+        -- 保留 pyright，禁掉多余的 jedi（双 Python LSP 重复加载，首开文件卡顿）
+        jedi_language_server = { enabled = false },
       },
     },
   },

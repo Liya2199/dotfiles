@@ -57,22 +57,24 @@ return {
   unix_domains = {},
 
   -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
---  wsl_domains = {
---    {
---      name = "WSL:Ubuntu",
---      distribution = "Ubuntu",
---      username = "liya",
---      default_cwd = "/home/liya",
---      default_prog = { "zsh" },
---    },
---  },
-   wsl_domains = {
+  -- Ubuntu禁用掉snapd就好了，那个傻逼snapd占用一大堆CPU和内存
+  -- sudo systemctl disable --now snapd snapd.socket
+  wsl_domains = {
     {
-      name = "WSL:archlinux2",
-      distribution = "archlinux2",
+      name = "WSL:Ubuntu",
+      distribution = "Ubuntu",
       username = "liya",
       default_cwd = "/home/liya",
-      default_prog = { "zsh" },
+      default_prog = { "bash" },
     },
   },
+  --  wsl_domains = {
+  --   {
+  --     name = "WSL:archlinux2",
+  --     distribution = "archlinux2",
+  --     username = "liya",
+  --     default_cwd = "/home/liya",
+  --     default_prog = { "zsh" },
+  --   },
+  -- },
 }
