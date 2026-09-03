@@ -1,0 +1,38 @@
+[general]
+working_directory = "C:\\Users\\21894"
+
+[terminal.shell]
+program = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+args = ["--nologo"]
+
+[window]
+opacity = 0.95
+decorations = "none" #无边框模式
+
+[window.position]
+x = 900
+y = 500
+
+[keyboard]
+bindings = [
+    {key = "Q", mods = "Control|Shift", action = "Quit"},
+    {key = "N", mods = "Control|Shift", action = "SpawnNewInstance"},
+    {key = "Plus", mods= "Control", action = "IncreaseFontSize"},
+    {key = "Minus", mods= "Control", action = "DecreaseFontSize"},
+    {key = "Key0", mods = "Control", action = "ResetFontSize"}
+]
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "Agave Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "Agave Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "Agave Nerd Font"
+style = "Italic"
